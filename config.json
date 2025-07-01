@@ -1,0 +1,3858 @@
+{
+    "log": {
+        "level": "warn",
+        "timestamp": true
+    },
+    "dns": {
+        "servers": [
+            {
+                "type": "https",
+                "server": "8.8.8.8",
+                "detour": "✅ Selector",
+                "tag": "dns-remote"
+            },
+            {
+                "type": "udp",
+                "server": "8.8.8.8",
+                "server_port": 53,
+                "tag": "dns-direct"
+            },
+            {
+                "type": "fakeip",
+                "tag": "dns-fake",
+                "inet4_range": "198.18.0.0/15",
+                "inet6_range": "fc00::/18"
+            }
+        ],
+        "rules": [
+            {
+                "domain": [
+                    "raw.githubusercontent.com"
+                ],
+                "server": "dns-direct"
+            },
+            {
+                "clash_mode": "Direct",
+                "server": "dns-direct"
+            },
+            {
+                "clash_mode": "Global",
+                "server": "dns-remote"
+            },
+            {
+                "type": "logical",
+                "mode": "and",
+                "rules": [
+                    {
+                        "rule_set": "geosite-ir"
+                    },
+                    {
+                        "rule_set": "geoip-ir"
+                    }
+                ],
+                "action": "route",
+                "server": "dns-direct"
+            },
+            {
+                "rule_set": [
+                    "geosite-malware",
+                    "geosite-phishing",
+                    "geosite-cryptominers"
+                ],
+                "action": "reject"
+            },
+            {
+                "disable_cache": true,
+                "inbound": "tun-in",
+                "query_type": [
+                    "A",
+                    "AAAA"
+                ],
+                "server": "dns-fake"
+            }
+        ],
+        "strategy": "ipv4_only",
+        "independent_cache": true
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "address": [
+                "172.18.0.1/30",
+                "fdfe:dcba:9876::1/126"
+            ],
+            "mtu": 9000,
+            "auto_route": true,
+            "strict_route": true,
+            "endpoint_independent_nat": true,
+            "stack": "mixed"
+        },
+        {
+            "type": "mixed",
+            "tag": "mixed-in",
+            "listen": "0.0.0.0",
+            "listen_port": 2080
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "selector",
+            "tag": "✅ Selector",
+            "outbounds": [
+                "💦 Best Ping 💥",
+                "💦 1 - VLESS - Domain : 443",
+                "💦 2 - VLESS - Domain : 443",
+                "💦 3 - VLESS - IPv4 : 443",
+                "💦 4 - VLESS - IPv4 : 443",
+                "💦 5 - VLESS - IPv4 : 443",
+                "💦 6 - VLESS - IPv4 : 443",
+                "💦 7 - VLESS - IPv4 : 443",
+                "💦 8 - VLESS - IPv4 : 443",
+                "💦 9 - VLESS - IPv4 : 443",
+                "💦 10 - VLESS - IPv6 : 443",
+                "💦 11 - VLESS - IPv6 : 443",
+                "💦 12 - VLESS - IPv6 : 443",
+                "💦 13 - VLESS - IPv6 : 443",
+                "💦 14 - VLESS - IPv6 : 443",
+                "💦 15 - VLESS - IPv6 : 443",
+                "💦 16 - VLESS - IPv6 : 443",
+                "💦 17 - VLESS - Domain : 8443",
+                "💦 18 - VLESS - Domain : 8443",
+                "💦 19 - VLESS - IPv4 : 8443",
+                "💦 20 - VLESS - IPv4 : 8443",
+                "💦 21 - VLESS - IPv4 : 8443",
+                "💦 22 - VLESS - IPv4 : 8443",
+                "💦 23 - VLESS - IPv4 : 8443",
+                "💦 24 - VLESS - IPv4 : 8443",
+                "💦 25 - VLESS - IPv4 : 8443",
+                "💦 26 - VLESS - IPv6 : 8443",
+                "💦 27 - VLESS - IPv6 : 8443",
+                "💦 28 - VLESS - IPv6 : 8443",
+                "💦 29 - VLESS - IPv6 : 8443",
+                "💦 30 - VLESS - IPv6 : 8443",
+                "💦 31 - VLESS - IPv6 : 8443",
+                "💦 32 - VLESS - IPv6 : 8443",
+                "💦 33 - VLESS - Domain : 2083",
+                "💦 34 - VLESS - Domain : 2083",
+                "💦 35 - VLESS - IPv4 : 2083",
+                "💦 36 - VLESS - IPv4 : 2083",
+                "💦 37 - VLESS - IPv4 : 2083",
+                "💦 38 - VLESS - IPv4 : 2083",
+                "💦 39 - VLESS - IPv4 : 2083",
+                "💦 40 - VLESS - IPv4 : 2083",
+                "💦 41 - VLESS - IPv4 : 2083",
+                "💦 42 - VLESS - IPv6 : 2083",
+                "💦 43 - VLESS - IPv6 : 2083",
+                "💦 44 - VLESS - IPv6 : 2083",
+                "💦 45 - VLESS - IPv6 : 2083",
+                "💦 46 - VLESS - IPv6 : 2083",
+                "💦 47 - VLESS - IPv6 : 2083",
+                "💦 48 - VLESS - IPv6 : 2083",
+                "💦 1 - Trojan - Domain : 443",
+                "💦 2 - Trojan - Domain : 443",
+                "💦 3 - Trojan - IPv4 : 443",
+                "💦 4 - Trojan - IPv4 : 443",
+                "💦 5 - Trojan - IPv4 : 443",
+                "💦 6 - Trojan - IPv4 : 443",
+                "💦 7 - Trojan - IPv4 : 443",
+                "💦 8 - Trojan - IPv4 : 443",
+                "💦 9 - Trojan - IPv4 : 443",
+                "💦 10 - Trojan - IPv6 : 443",
+                "💦 11 - Trojan - IPv6 : 443",
+                "💦 12 - Trojan - IPv6 : 443",
+                "💦 13 - Trojan - IPv6 : 443",
+                "💦 14 - Trojan - IPv6 : 443",
+                "💦 15 - Trojan - IPv6 : 443",
+                "💦 16 - Trojan - IPv6 : 443",
+                "💦 17 - Trojan - Domain : 8443",
+                "💦 18 - Trojan - Domain : 8443",
+                "💦 19 - Trojan - IPv4 : 8443",
+                "💦 20 - Trojan - IPv4 : 8443",
+                "💦 21 - Trojan - IPv4 : 8443",
+                "💦 22 - Trojan - IPv4 : 8443",
+                "💦 23 - Trojan - IPv4 : 8443",
+                "💦 24 - Trojan - IPv4 : 8443",
+                "💦 25 - Trojan - IPv4 : 8443",
+                "💦 26 - Trojan - IPv6 : 8443",
+                "💦 27 - Trojan - IPv6 : 8443",
+                "💦 28 - Trojan - IPv6 : 8443",
+                "💦 29 - Trojan - IPv6 : 8443",
+                "💦 30 - Trojan - IPv6 : 8443",
+                "💦 31 - Trojan - IPv6 : 8443",
+                "💦 32 - Trojan - IPv6 : 8443",
+                "💦 33 - Trojan - Domain : 2083",
+                "💦 34 - Trojan - Domain : 2083",
+                "💦 35 - Trojan - IPv4 : 2083",
+                "💦 36 - Trojan - IPv4 : 2083",
+                "💦 37 - Trojan - IPv4 : 2083",
+                "💦 38 - Trojan - IPv4 : 2083",
+                "💦 39 - Trojan - IPv4 : 2083",
+                "💦 40 - Trojan - IPv4 : 2083",
+                "💦 41 - Trojan - IPv4 : 2083",
+                "💦 42 - Trojan - IPv6 : 2083",
+                "💦 43 - Trojan - IPv6 : 2083",
+                "💦 44 - Trojan - IPv6 : 2083",
+                "💦 45 - Trojan - IPv6 : 2083",
+                "💦 46 - Trojan - IPv6 : 2083",
+                "💦 47 - Trojan - IPv6 : 2083",
+                "💦 48 - Trojan - IPv6 : 2083"
+            ]
+        },
+        {
+            "type": "direct",
+            "tag": "direct"
+        },
+        {
+            "type": "urltest",
+            "tag": "💦 Best Ping 💥",
+            "outbounds": [
+                "💦 1 - VLESS - Domain : 443",
+                "💦 2 - VLESS - Domain : 443",
+                "💦 3 - VLESS - IPv4 : 443",
+                "💦 4 - VLESS - IPv4 : 443",
+                "💦 5 - VLESS - IPv4 : 443",
+                "💦 6 - VLESS - IPv4 : 443",
+                "💦 7 - VLESS - IPv4 : 443",
+                "💦 8 - VLESS - IPv4 : 443",
+                "💦 9 - VLESS - IPv4 : 443",
+                "💦 10 - VLESS - IPv6 : 443",
+                "💦 11 - VLESS - IPv6 : 443",
+                "💦 12 - VLESS - IPv6 : 443",
+                "💦 13 - VLESS - IPv6 : 443",
+                "💦 14 - VLESS - IPv6 : 443",
+                "💦 15 - VLESS - IPv6 : 443",
+                "💦 16 - VLESS - IPv6 : 443",
+                "💦 17 - VLESS - Domain : 8443",
+                "💦 18 - VLESS - Domain : 8443",
+                "💦 19 - VLESS - IPv4 : 8443",
+                "💦 20 - VLESS - IPv4 : 8443",
+                "💦 21 - VLESS - IPv4 : 8443",
+                "💦 22 - VLESS - IPv4 : 8443",
+                "💦 23 - VLESS - IPv4 : 8443",
+                "💦 24 - VLESS - IPv4 : 8443",
+                "💦 25 - VLESS - IPv4 : 8443",
+                "💦 26 - VLESS - IPv6 : 8443",
+                "💦 27 - VLESS - IPv6 : 8443",
+                "💦 28 - VLESS - IPv6 : 8443",
+                "💦 29 - VLESS - IPv6 : 8443",
+                "💦 30 - VLESS - IPv6 : 8443",
+                "💦 31 - VLESS - IPv6 : 8443",
+                "💦 32 - VLESS - IPv6 : 8443",
+                "💦 33 - VLESS - Domain : 2083",
+                "💦 34 - VLESS - Domain : 2083",
+                "💦 35 - VLESS - IPv4 : 2083",
+                "💦 36 - VLESS - IPv4 : 2083",
+                "💦 37 - VLESS - IPv4 : 2083",
+                "💦 38 - VLESS - IPv4 : 2083",
+                "💦 39 - VLESS - IPv4 : 2083",
+                "💦 40 - VLESS - IPv4 : 2083",
+                "💦 41 - VLESS - IPv4 : 2083",
+                "💦 42 - VLESS - IPv6 : 2083",
+                "💦 43 - VLESS - IPv6 : 2083",
+                "💦 44 - VLESS - IPv6 : 2083",
+                "💦 45 - VLESS - IPv6 : 2083",
+                "💦 46 - VLESS - IPv6 : 2083",
+                "💦 47 - VLESS - IPv6 : 2083",
+                "💦 48 - VLESS - IPv6 : 2083",
+                "💦 1 - Trojan - Domain : 443",
+                "💦 2 - Trojan - Domain : 443",
+                "💦 3 - Trojan - IPv4 : 443",
+                "💦 4 - Trojan - IPv4 : 443",
+                "💦 5 - Trojan - IPv4 : 443",
+                "💦 6 - Trojan - IPv4 : 443",
+                "💦 7 - Trojan - IPv4 : 443",
+                "💦 8 - Trojan - IPv4 : 443",
+                "💦 9 - Trojan - IPv4 : 443",
+                "💦 10 - Trojan - IPv6 : 443",
+                "💦 11 - Trojan - IPv6 : 443",
+                "💦 12 - Trojan - IPv6 : 443",
+                "💦 13 - Trojan - IPv6 : 443",
+                "💦 14 - Trojan - IPv6 : 443",
+                "💦 15 - Trojan - IPv6 : 443",
+                "💦 16 - Trojan - IPv6 : 443",
+                "💦 17 - Trojan - Domain : 8443",
+                "💦 18 - Trojan - Domain : 8443",
+                "💦 19 - Trojan - IPv4 : 8443",
+                "💦 20 - Trojan - IPv4 : 8443",
+                "💦 21 - Trojan - IPv4 : 8443",
+                "💦 22 - Trojan - IPv4 : 8443",
+                "💦 23 - Trojan - IPv4 : 8443",
+                "💦 24 - Trojan - IPv4 : 8443",
+                "💦 25 - Trojan - IPv4 : 8443",
+                "💦 26 - Trojan - IPv6 : 8443",
+                "💦 27 - Trojan - IPv6 : 8443",
+                "💦 28 - Trojan - IPv6 : 8443",
+                "💦 29 - Trojan - IPv6 : 8443",
+                "💦 30 - Trojan - IPv6 : 8443",
+                "💦 31 - Trojan - IPv6 : 8443",
+                "💦 32 - Trojan - IPv6 : 8443",
+                "💦 33 - Trojan - Domain : 2083",
+                "💦 34 - Trojan - Domain : 2083",
+                "💦 35 - Trojan - IPv4 : 2083",
+                "💦 36 - Trojan - IPv4 : 2083",
+                "💦 37 - Trojan - IPv4 : 2083",
+                "💦 38 - Trojan - IPv4 : 2083",
+                "💦 39 - Trojan - IPv4 : 2083",
+                "💦 40 - Trojan - IPv4 : 2083",
+                "💦 41 - Trojan - IPv4 : 2083",
+                "💦 42 - Trojan - IPv6 : 2083",
+                "💦 43 - Trojan - IPv6 : 2083",
+                "💦 44 - Trojan - IPv6 : 2083",
+                "💦 45 - Trojan - IPv6 : 2083",
+                "💦 46 - Trojan - IPv6 : 2083",
+                "💦 47 - Trojan - IPv6 : 2083",
+                "💦 48 - Trojan - IPv6 : 2083"
+            ],
+            "url": "https://www.gstatic.com/generate_204",
+            "interval": "30s"
+        },
+        {
+            "tag": "💦 1 - VLESS - Domain : 443",
+            "type": "vless",
+            "server": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/Y22cLPQfu4uuokJx",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGedj1sh759Ohv5jSuAz57fLRzHQ1f.Amirali-MohammADKIaee.wORKErs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 2 - VLESS - Domain : 443",
+            "type": "vless",
+            "server": "www.speedtest.net",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/7WTN7SyBNIEWkpW9",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgeDj1Sh759OHV5jsUAZ57flRzHq1F.aMirALI-MOhAMMadKiaee.wOrkers.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 3 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.112.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/hh5JMEyXutLWknni",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGedJ1Sh759oHv5JSuAZ57flRzHq1f.aMIRalI-MohamMADkiAeE.wOrKers.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 4 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.64.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tEx5SE78uNjLnNxy",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgeDj1SH759oHv5jsuAz57FlRzhq1f.aMIRaLI-mOHAmmaDkIaEE.WoRKers.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 5 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.96.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/H7gV1d8nwT3N9R0a",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGEdJ1sh759OHV5jSuaz57flRzHq1f.aMIRaLI-MohamMAdKiAEe.wORKeRs.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 6 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.32.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/dyKmsHsxnIONc4q5",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqGEDj1sh759oHV5jsuAz57FLRZhQ1F.AMiRALi-MOhAmMAdKiaEe.WorKERS.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 7 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.16.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/8EqVpKa3kQWjuPCa",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGEDj1Sh759OhV5JsuAZ57flrzhq1f.AMirAli-MoHaMMADkIaEE.wORKErs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 8 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.48.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/EupxRcixytvAJPVM",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQgeDJ1Sh759OhV5JSuaZ57fLRzHQ1f.AmiRAlI-MoHammAdkiaEE.WOrKers.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 9 - VLESS - IPv4 : 443",
+            "type": "vless",
+            "server": "104.21.80.1",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/PWyFMKZnn91dAcZa",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "Qeqgedj1Sh759OHv5jsuaZ57flrzHq1f.aMIRalI-moHaMmadKIaeE.woRkErS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 10 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:4001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/7zDKyA5wRELKqUAn",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgEDJ1Sh759oHv5JSuAz57fLrZHq1f.amiRali-MOhAmmADkiAeE.WORKErS.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 11 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:3001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/5Q3aD28kFp1ANmhc",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgedj1sh759oHV5JsuAz57FLrzhQ1f.AmirALI-moHAmMAdKiAEE.WOrkErs.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 12 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:6001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/6yURMCI0Q0KJOEWC",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqGedJ1Sh759OhV5jSUaZ57FLrZhq1F.AMIrALI-moHammadKIaeE.woRkERS.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 13 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:5001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/degB5rzyi50MJatb",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQgEDJ1sh759Ohv5jsuAz57FlRzHq1f.AMiRali-mOhammAdKiaEe.WORkerS.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 14 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:7001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/XO7LXdKQkgAggkqs",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQgEDj1sH759OHV5JSUaz57fLRZHQ1f.AmiRAlI-MOHammAdKiaEE.WorKerS.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 15 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:1001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/sTCTvU6PdnkZmRer",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGEDJ1Sh759ohV5jSuaz57FlrzHq1F.amIRali-mohaMMAdkiAEE.woRkeRS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 16 - VLESS - IPv6 : 443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:2001]",
+            "server_port": 443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/4NyeBvzmQBcFB6fV",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgedJ1sH759Ohv5jSUaz57fLrZHQ1F.AmIraLI-mOhAMMAdkiaee.wORKErS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 17 - VLESS - Domain : 8443",
+            "type": "vless",
+            "server": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/l7Zbc2vYvcJziRcH",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgeDj1sH759oHV5JSuaz57FlRZhq1f.AmIRalI-MohaMMADKiAEe.wORKERS.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 18 - VLESS - Domain : 8443",
+            "type": "vless",
+            "server": "www.speedtest.net",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/er3Rbw39EKT2szYw",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgeDj1Sh759ohv5JsUAz57FLrZhQ1F.amirALi-mOHAMMadkiAeE.WorKers.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 19 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.112.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/6flcXMQdcRTp1c8j",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgeDj1sH759Ohv5JSuAZ57FLrZhQ1F.AmIrALi-moHAmmADkiAee.WORKers.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 20 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.64.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/FnXBMFD1euNeEkl0",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgEDJ1sh759oHv5jSUaz57fLRzHq1F.AmIRaLi-MohaMMaDKiaEE.wORKErs.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 21 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.96.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/RWs8lhFR6Yv8rDMi",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQGeDj1SH759Ohv5JSUAZ57FLrzhq1f.AmiRalI-moHammADkiaEE.WOrKers.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 22 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.32.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/C5qDQuCxNrGKbRUF",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqGEDJ1Sh759OhV5JsUaz57fLRzHq1f.amirALi-moHAmmaDkIAEE.WorKers.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 23 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.16.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/BLl3AU0RUEMtdeLI",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqGEDj1Sh759ohV5JSuaz57FlRZhq1F.AmiraLI-MOHAmMADKIaeE.wOrkeRs.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 24 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.48.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/feJ5TmJwgt07XsCl",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqgeDJ1sh759Ohv5jsuaz57fLRzhQ1f.AmiRalI-mOhAMmAdkiaEe.WORkeRs.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 25 - VLESS - IPv4 : 8443",
+            "type": "vless",
+            "server": "104.21.80.1",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/aODJc7TEm6l4HPGH",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQGEdj1sh759ohv5jSUAZ57flRzhq1F.AmIRALI-mohaMmaDkiaEe.WOrkERS.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 26 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:4001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/uvMy9iU0OcYKs961",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqgedJ1sh759ohv5JSUAZ57flrZhQ1F.AmirALI-mOhAMMAdkiAee.wOrKERs.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 27 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:3001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/onK2AnOtHskqEHxm",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQgeDJ1SH759OHv5jSUAZ57FLrzHq1F.aMIraLi-moHammAdKiaeE.WORKeRs.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 28 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:6001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/CbuUQFvvzA1HTy48",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgedj1Sh759oHV5JsUaZ57fLRZHq1f.AMIRali-MOhAmMadKiAee.worKers.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 29 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:5001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/EGBTUY6hVEDfQikQ",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQgEdJ1SH759OHV5jSuAz57flrZHq1F.amiRaLi-mohammaDkIaee.wOrKerS.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 30 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:7001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/YFNTRJhQPrOqqU9e",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqgedJ1SH759ohv5JSUaZ57fLRzhQ1F.amIRaLi-MOHaMMadKiAEE.WORKErS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 31 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:1001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/NqE0wPe5iRW2lOcE",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgedJ1Sh759OHV5JSUAz57flRzhq1f.AmIrALi-mOhammADkiAEe.WOrkers.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 32 - VLESS - IPv6 : 8443",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:2001]",
+            "server_port": 8443,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/xZrPTQ0yvhKkj7bj",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqGEdJ1SH759Ohv5jsuAz57fLRZhQ1f.AMirali-MOHammaDkiaee.workeRs.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 33 - VLESS - Domain : 2083",
+            "type": "vless",
+            "server": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/uYxgWsWpnqQ8GJRN",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqGeDJ1sh759oHv5JsUaz57FlrzHq1f.aMirALI-mohaMmadkiaee.WORkERS.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 34 - VLESS - Domain : 2083",
+            "type": "vless",
+            "server": "www.speedtest.net",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/99jO7aS0caOACQFC",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgEDJ1sh759ohV5jsUAz57fLRzhQ1f.aMiRali-MohAMMAdKIaeE.worKers.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 35 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.112.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/qYVGm7xwjOTfoCIF",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGEdJ1Sh759oHV5JSuAZ57flrZhq1F.AMirAli-mOHaMMAdKIAEE.WORkErS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 36 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.64.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/0cvl4petlHMiE1AG",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqGedJ1SH759oHV5jsUAZ57fLrZhQ1F.amIraLi-MoHAMmAdKiaEe.WOrKeRS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 37 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.96.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/Yvjr4Rn8qzXEszmx",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGEDJ1Sh759OHV5JSUaZ57flrZhQ1F.amiraLi-mohaMmadKIaeE.wOrKeRs.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 38 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.32.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/jFnYb7NUM8sf4vtb",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgedj1sh759oHv5jSUaZ57fLrZHQ1F.AMIrali-mohAmMadKIaEe.wOrKERs.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 39 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.16.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/hBmkZcjRypoPnp9R",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgedJ1Sh759ohV5JsUAZ57FLrzhq1f.amIRaLi-MOhamMadKIAeE.wOrKERs.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 40 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.48.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/HUfKd6iP25n9mWeW",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgEdj1SH759ohv5jSUaz57fLrZhq1F.AmirALi-MohAMMAdKiaEE.WOrKeRS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 41 - VLESS - IPv4 : 2083",
+            "type": "vless",
+            "server": "104.21.80.1",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/wDxtjuVSZUeWijxf",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQgeDj1SH759oHv5JsuAZ57FLrZhQ1F.AMIRALi-MOHAmMADkIaEE.WorKERs.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 42 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:4001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/F4bKv1PHaSTfVD7r",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgedJ1sh759ohv5JsuAZ57FlrzHQ1f.aMIRALi-mOhaMmadkiAEE.WoRKErs.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 43 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:3001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/mOaLHF05Gzei8lUS",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGedJ1sh759ohv5jsUAZ57Flrzhq1f.AMIrali-mohAMmAdKIAEe.WoRKerS.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 44 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:6001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/qDfpsYhqlLXkC1ru",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgEDJ1SH759Ohv5jsUaZ57FLrZhq1F.AMiRALi-mOhAMMaDkiaeE.woRKers.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 45 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:5001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/PQFTbMq6Fv9N531u",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgEdJ1SH759OHV5JSuaZ57FLRzHQ1F.AmIRALI-mOhAmMadKiAee.worKErS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 46 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:7001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/S9htVbgtJ7SeLWya",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGeDj1SH759oHv5JSUAz57flRZHQ1F.AMIrali-MohammAdkiaee.woRkerS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 47 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:1001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/OJ5uTcAQuNmT2MzG",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqGeDJ1sH759oHV5JSuaZ57fLrzHq1F.aMIRALI-mOhaMmaDKIaEe.wORkeRS.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 48 - VLESS - IPv6 : 2083",
+            "type": "vless",
+            "server": "[2606:4700:3030::6815:2001]",
+            "server_port": 2083,
+            "uuid": "fb86f455-55bd-4d2f-b838-f667c7c3a1c8",
+            "network": "tcp",
+            "packet_encoding": "",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/S8IxqhO0YI35frbG",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGEDJ1Sh759OHV5jSuAz57flRzhQ1F.amiRaLI-MOHammadKIaEE.WORkerS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 1 - Trojan - Domain : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trTEliL5v89vmZY9QQ",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqgedJ1sH759ohv5JSuAZ57FlRzHQ1F.AmiRAli-MohamMaDKiAee.woRkers.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 2 - Trojan - Domain : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "www.speedtest.net",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trBlzEJ4nuL9Iu7LLP",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgedj1sH759oHV5jSuaZ57fLRZhQ1F.aMIRali-mohAmMAdKiAEe.WorkERs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 3 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.112.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trixcrsH53BczA0NeE",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgEDJ1sH759oHv5JsUaz57FlrZhq1F.AmiRalI-MoHaMmadKiAEe.WORkerS.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 4 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.64.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trezmrXCHWhjudSAaG",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgEDj1sH759OhV5jSUAz57FlRZHq1F.amIraLI-MoHamMadkIAee.worKerS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 5 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.96.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trAYsScsdh7COomxsy",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGedj1sH759oHV5jSUaz57fLrzHQ1F.amIRALi-mOhamMADkiAEE.WorKers.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 6 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.32.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trUChNIF5jXbUsQznX",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgEdJ1Sh759oHv5JSUAz57flRzhQ1F.aMIrALi-mOhAmmAdkIaee.WorKErS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 7 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.16.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trGg53QZdTlHW729CJ",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgeDj1sh759ohv5JSuAZ57FlRzhQ1f.AMIRali-MOHAmmAdKiaEe.wOrkERS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 8 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.48.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trVwS76VaMfOmb17jt",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQGedj1Sh759ohv5JsuAZ57flRZHQ1F.AmIRalI-MohaMMAdkIAee.wORkErS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 9 - Trojan - IPv4 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.80.1",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trPApAPnavGdtnPGvp",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGedj1Sh759ohv5jsuAz57FlRZhQ1F.AMiraLi-mohaMmAdkiaeE.WorKERS.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 10 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:4001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trsNHhU8nqMvjszs1k",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeqGEdJ1Sh759OhV5JsUaz57fLrzhq1F.amIraLI-mOhAMMaDKiaee.workERS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 11 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:3001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trvRI3NVlpCoGRUgbg",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqGEdj1Sh759oHV5JsUAZ57FLRzHq1f.aMirAlI-MOHamMADKiaEE.WorKErs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 12 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:6001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trMeullGvIjnrIpe5l",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqGedj1sH759OHv5jSuaz57fLRzHq1F.amIrALI-MOhaMMaDKIaEe.woRKErS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 13 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:5001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trt6TVUqi4pj7lbldE",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGeDj1SH759oHV5JSUaz57FLRZHq1f.AMIRAlI-MOHaMMADKiaee.workERs.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 14 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:7001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trkNXvJUwBBMUesnPk",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGEdj1SH759OhV5JSUaZ57flrzHQ1F.aMiRalI-mOHAMmAdkIaee.WOrkeRs.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 15 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:1001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trS6ipApJH8txYUKli",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGedJ1sh759oHv5JSUAZ57fLrzHq1F.aMiRali-MOHAmmADKIaeE.WORkERs.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 16 - Trojan - IPv6 : 443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:2001]",
+            "server_port": 443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trwEp98WR8PzQl1Tkl",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgeDJ1SH759OHv5jsUAZ57flRZhQ1F.AMiraLi-mOHAmMaDkIAeE.wOrkeRS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 17 - Trojan - Domain : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trY92hNREDYETUljFu",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgeDJ1Sh759OHv5JsuaZ57fLRZhq1f.AMirali-mOhAmmADKiaEE.woRKeRS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 18 - Trojan - Domain : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "www.speedtest.net",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tr0QNRvzlO3WcZmnCk",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgedj1sH759OhV5JsUaZ57fLrZHq1f.amIRalI-mOHamMadKIAEe.woRKErS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 19 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.112.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trOsTBBEJdjAmD3Csq",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgedJ1Sh759ohV5JSuAz57fLrzhq1F.aMiRAlI-mOhAmmadkIAeE.workErs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 20 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.64.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trApVxQZbXB7rnp5Mb",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQGEdj1sh759ohv5JSuaz57flrzhq1f.aMiRalI-MohaMMaDkIaEE.WOrkErS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 21 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.96.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trB44rpxnBtbDP0o53",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGeDJ1sh759OhV5JSuAz57FlRzhq1f.aMIrALI-MOhAMmADKIaeE.WorKErs.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 22 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.32.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tr5LrDVyvRvFlkxXPP",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgEdj1sh759Ohv5JsuaZ57FLRZhQ1F.AmIraLI-mohAMMAdkiAeE.wORKers.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 23 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.16.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tr3DmaO3TK1aeZxgPJ",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqgEDJ1sh759OHv5JSUaz57FlRzhq1f.AMIRaLi-MOHaMMaDKiAEe.WORkERs.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 24 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.48.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trk4xEDgsptoasEGLb",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGEDj1Sh759ohv5JSUaZ57FLrZhQ1f.AmiRaLI-mohaMMadkiAEE.WorKerS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 25 - Trojan - IPv4 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.80.1",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trqxxRxpZOOJmvWaeV",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGeDJ1Sh759ohv5JSuaZ57flRzhq1f.amiRALI-MOHAmMAdKiaeE.wOrKeRS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 26 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:4001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trnrupelIjJSOX6y44",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQgeDJ1Sh759OHv5jSuaZ57FLRzhq1f.AmiRalI-mohammADkiaee.WOrkers.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 27 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:3001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trjT99eSycyfl5ruy1",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqGeDj1sh759OhV5JSUAZ57FlrZhq1f.aMIRALI-MOHaMmADkiaeE.WorkeRS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 28 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:6001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trDTCeVqAHokFCSI66",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGEdj1sH759ohV5JSUAz57fLrzHQ1f.AMirALI-mOHamMadKIaEe.woRKeRS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 29 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:5001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trWny8BE2ZEJ6nr7nv",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqGeDj1SH759oHv5jsuAZ57FLrZHq1f.AmIRALI-mOHaMMaDKIaEE.WOrKERs.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 30 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:7001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tr9IN4LK9EKhbs9o4P",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGeDJ1Sh759oHV5JSuaz57FLrZHQ1f.AmirALi-mohAMmAdkIAee.WoRKErS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 31 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:1001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trgvyrcwIyayMYCzwI",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgEdJ1sh759OHv5JsuAz57FlrZhq1f.aMiRALI-MoHaMMaDKIaEe.WORkerS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 32 - Trojan - IPv6 : 8443",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:2001]",
+            "server_port": 8443,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trpgn05a96B8sCXC7L",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGEdJ1sH759Ohv5JsUAz57FlRZhQ1F.aMIrali-mOHAMMaDKiAEe.WoRkerS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 33 - Trojan - Domain : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trXgQpa97LtCw5fyrA",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQGeDj1sh759oHV5jSuaz57fLrZHQ1f.AmIRAli-mOHAmmadKiAEE.wORKErS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 34 - Trojan - Domain : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "www.speedtest.net",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trHxVU8Yxh9uP3wfYz",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQgEDJ1sH759OHV5jSuAz57flrZHq1f.aMIrAli-mOhaMMaDkiAEe.WORKerS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 35 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.112.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trjWmNMr9RyUjxLWo6",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgeDJ1Sh759OHV5JsuAz57FlRzhQ1f.AMiRAli-mOhammADKiAee.worKERs.dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 36 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.64.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tr6CWxaATL99KmFIiN",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQGEDJ1SH759ohv5JSuAZ57FlrZhq1f.amIRalI-MoHamMAdKiaEE.wOrKERS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 37 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.96.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trFfWAX2ddqdkHWaQr",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQGeDj1SH759OHv5JSUaZ57fLrZHQ1F.AMiRaLI-mOhaMMadKIaee.WorkERs.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 38 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.32.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trRyIshfXvOia1ZSlP",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqGEDJ1sh759ohv5JsuAz57fLRZHQ1F.AmIrAli-mohAmMadkiaee.WorkeRs.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 39 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.16.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trx2hw4LbsA5u9prfi",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEqgEDj1sH759Ohv5JSUAZ57FlrzhQ1f.aMIrAli-MohamMaDKIAEe.worKErs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 40 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.48.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trmfG8FeHrAxAgGTkO",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgEDj1sh759OHv5jsUaz57FlrzhQ1f.Amirali-mohaMMADKIaeE.woRKerS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 41 - Trojan - IPv4 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "104.21.80.1",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trmN8nd7HE4qF0I8IY",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGEdj1sH759ohV5JSuaZ57flrzHQ1F.AMIrALI-moHamMaDKIaeE.WORKers.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 42 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:4001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trIQDmZdZjguqTwrj1",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEqGeDJ1sH759oHV5jsuAz57FlRZhq1F.AMIRaLi-MoHaMmADKIaEe.wOrKErs.deV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 43 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:3001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trdplMYpCophcIL981",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QEQGEdj1sh759OHv5JsUAz57flRZHQ1F.aMiraLi-MohammADkiAEe.WOrKerS.dEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 44 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:6001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tr7ROSfsKmyQNRdYz7",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeQgeDJ1Sh759OHV5jSUaz57FLRZhQ1f.aMiRaLi-mOHAmMAdKiAEe.wOrkeRS.dEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 45 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:5001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tryWNCdy7zdiNtILrZ",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "QeqgeDj1sh759OhV5jsUaz57FLRZhQ1f.AMIRALI-MOHaMMADkiaEe.WOrkerS.Dev",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 46 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:7001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trnEV4R8unHGxJ2mnh",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qeQgEdJ1sh759oHv5jSUAZ57fLrzHQ1F.amirali-moHaMmADkiaEe.WORkers.DeV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 47 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:1001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/tri662z0XhxAILCu6F",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgEdj1sH759oHV5JsUaz57flRzhQ1f.aMiRaLi-MOhAmMAdkiaEE.WoRkERS.DEv",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        },
+        {
+            "tag": "💦 48 - Trojan - IPv6 : 2083",
+            "type": "trojan",
+            "password": "w:gf)GcD^9HY",
+            "server": "[2606:4700:3030::6815:2001]",
+            "server_port": 2083,
+            "network": "tcp",
+            "transport": {
+                "early_data_header_name": "Sec-WebSocket-Protocol",
+                "max_early_data": 2560,
+                "headers": {
+                    "Host": "qeqgedj1sh759ohv5jsuaz57flrzhq1f.amirali-mohammadkiaee.workers.dev"
+                },
+                "path": "/trvjduE7Y3mnXgvk9B",
+                "type": "ws"
+            },
+            "domain_resolver": {
+                "server": "dns-direct",
+                "strategy": "prefer_ipv4",
+                "rewrite_ttl": 60
+            },
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
+            "tls": {
+                "alpn": "http/1.1",
+                "enabled": true,
+                "insecure": false,
+                "server_name": "qEQgEDj1Sh759ohV5jsUAz57FlrZHQ1F.AMiRalI-moHammadkIAeE.WOrkERS.DEV",
+                "record_fragment": false,
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "randomized"
+                }
+            }
+        }
+    ],
+    "route": {
+        "rules": [
+            {
+                "action": "sniff"
+            },
+            {
+                "action": "hijack-dns",
+                "mode": "or",
+                "rules": [
+                    {
+                        "port": 53
+                    },
+                    {
+                        "protocol": "dns"
+                    }
+                ],
+                "type": "logical"
+            },
+            {
+                "clash_mode": "Direct",
+                "outbound": "direct"
+            },
+            {
+                "clash_mode": "Global",
+                "outbound": "✅ Selector"
+            },
+            {
+                "ip_is_private": true,
+                "outbound": "direct"
+            },
+            {
+                "network": "udp",
+                "action": "reject"
+            },
+            {
+                "rule_set": [
+                    "geosite-malware",
+                    "geosite-phishing",
+                    "geosite-cryptominers"
+                ],
+                "action": "reject"
+            },
+            {
+                "rule_set": [
+                    "geoip-malware",
+                    "geoip-phishing"
+                ],
+                "action": "reject"
+            },
+            {
+                "rule_set": [
+                    "geosite-ir"
+                ],
+                "action": "route",
+                "outbound": "direct"
+            },
+            {
+                "rule_set": [
+                    "geoip-ir"
+                ],
+                "action": "route",
+                "outbound": "direct"
+            }
+        ],
+        "rule_set": [
+            {
+                "type": "remote",
+                "tag": "geosite-malware",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-malware.srs",
+                "download_detour": "direct"
+            },
+            {
+                "type": "remote",
+                "tag": "geoip-malware",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-malware.srs",
+                "download_detour": "direct"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-phishing",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-phishing.srs",
+                "download_detour": "direct"
+            },
+            {
+                "type": "remote",
+                "tag": "geoip-phishing",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-phishing.srs",
+                "download_detour": "direct"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-cryptominers",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-cryptominers.srs",
+                "download_detour": "direct"
+            },
+            {
+                "type": "remote",
+                "tag": "geosite-ir",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-ir.srs",
+                "download_detour": "direct"
+            },
+            {
+                "type": "remote",
+                "tag": "geoip-ir",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ir.srs",
+                "download_detour": "direct"
+            }
+        ],
+        "auto_detect_interface": true,
+        "final": "✅ Selector"
+    },
+    "ntp": {
+        "enabled": true,
+        "server": "time.cloudflare.com",
+        "server_port": 123,
+        "domain_resolver": "dns-direct",
+        "interval": "30m",
+        "write_to_system": false
+    },
+    "experimental": {
+        "cache_file": {
+            "enabled": true,
+            "store_fakeip": true
+        },
+        "clash_api": {
+            "external_controller": "127.0.0.1:9090",
+            "external_ui": "ui",
+            "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+            "external_ui_download_detour": "direct",
+            "default_mode": "Rule"
+        }
+    }
+}
